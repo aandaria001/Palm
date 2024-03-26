@@ -14,7 +14,10 @@ def index():
     
 @app.route("/main",methods=["GET","POST"])
 def main():
-    name = request.form.get("name")
+    global flag, name
+    if flag == 1:
+        name = request.form.get("name")
+        flag = 0
     return(render_template("main.html",r=name))
 
 @app.route("/palm_request",methods=["GET","POST"])
@@ -29,6 +32,12 @@ def palm_reply():
         messages=q
     )
     return(render_template("palm_reply.html",r=r.last))
+
+@app.route("/end",methods=["GET","POST"])
+def end():
+    global flag
+    flag = 1
+    return(render_template("palm.html"))
 
 if __name__ == "__main__":
     app.run()
