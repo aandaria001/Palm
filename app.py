@@ -13,6 +13,8 @@ app = Flask(__name__)
 
 @app.route("/",methods=["GET","POST"])
 def index():
+    global flag
+    flag = 1
     return(render_template("index.html"))
     
 @app.route("/main",methods=["GET","POST"])
